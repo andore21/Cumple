@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Birthday - BTS Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #fce4ec;
+            font-family: 'Montserrat', sans-serif;
+            color: #4a4a4a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Envoltorio simulando la pantalla del celular lila/rosado sutil */
+        .phone-wrapper {
+            background-color: #f3e5f5; 
+            padding: 12px;
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        /* --- PANTALLA PRINCIPAL --- */
+        .main-container {
+            background-color: #ffffff;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            border-radius: 20px;
+            overflow: hidden;
+            padding-bottom: 30px;
+        }
+
+        /* --- PORTADA / FOTO DE ANDREA --- */
+        .hero-section {
+            padding: 25px 20px;
+            background: linear-gradient(to bottom, #ffffff, #f3e5f5);
+        }
+
+        .profile-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 4px solid #e1bee7;
+            margin: 0 auto 15px auto;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(225, 190, 231, 0.6);
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- TITULARES ESTILO ORIGINAL --- */
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 3em;
+            color: #8e24aa;
+            margin-bottom: 5px;
+        }
+
+        .gold-title {
+            font-size: 1.8em;
+            font-weight: 900;
+            color: #b3a15c;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .section-box-styled {
+            background-color: #fff3f8;
+            border: 1px dashed #d1c4e9;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 15px;
+        }
+
+        /* --- CONTADOR LILA/DORADO --- */
+        .countdown-container {
+            background: linear-gradient(135deg, #f3e5f5, #fff3f8);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 15px auto;
+            max-width: 320px;
+            border: 1px solid #eaeeff;
+        }
+
+        .countdown-title {
+            font-size: 0.75em;
+            color: #7b1fa2;
+            font-weight: bold;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .countdown-row {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .count-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .count-num {
+            font-size: 1.4em;
+            font-weight: 900;
+            color: #b3a15c;
+        }
+
+        .count-lbl {
+            font-size: 0.6em;
+            text-transform: uppercase;
+            color: #9e9e9e;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- BOTONES MODERNOS REDONDEADOS --- */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 85%;
+            max-width: 290px;
+            color: #ffffff;
+            text-transform: none;
+            font-weight: 700;
+            font-size: 0.9em;
+            padding: 14px;
+            border: none;
+            border-radius: 30px;
+            margin: 8px 0;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .action-btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-gold { background: linear-gradient(135deg, #d4af37, #b3a15c); }
+        .btn-purple { background: linear-gradient(135deg, #7b1fa2, #9c27b0); }
+        .btn-whatsapp { background: linear-gradient(135deg, #25D366, #1cbd57); }
+        .btn-dark { background: linear-gradient(135deg, #cca23a, #b38f2b); }
+
+        .info-phrase {
+            font-style: italic;
+            font-size: 0.95em;
+            color: #616161;
+            padding: 0 25px;
+            line-height: 1.5;
+            margin: 15px 0;
+        }
+
+        /* --- ELEMENTOS DE DATOS --- */
+        .data-list {
+            list-style: none;
+            text-align: left;
+            max-width: 290px;
+            margin: 0 auto;
+        }
+
+        .data-list li {
+            padding: 12px 0;
+            font-size: 0.95em;
+            color: #333333;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* --- SECCIÓN DE REGALOS (YAPE) Y MEME --- */
+        .gift-box {
+            background-color: #f8f1ff;
+            border: 1px dashed #ba68c8;
+            border-radius: 15px;
+            padding: 20px 15px;
+            margin: 20px 15px;
+        }
+
+        .gift-title {
+            color: #7b1fa2;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gift-item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 5px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.95em;
+        }
+
+        .color-circle {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-left: 4px;
+            border: 1px solid #ccc;
+        }
+
+        /* Imagen del meme de Yape con tamaño controlado y pulcro */
+        .yape-meme-wrapper {
+            width: 100%;
+            max-width: 180px;
+            margin: 20px auto 10px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 2px solid #e1bee7;
+        }
+
+        .yape-meme-wrapper img {
+            width: 100%;
+            display: block;
+        }
+
+        /* INPUT DE MÚSICA */
+        .music-input-field {
+            width: 85%;
+            max-width: 280px;
+            padding: 11px;
+            border: 1px solid #ce93d8;
+            border-radius: 20px;
+            text-align: center;
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+        }
+
+        /* --- PRESENTACIÓN INICIAL DE LA INVITACIÓN --- */
+        #envelope-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            /* Aquí cargamos tu fondo de BTS correctamente nombrado */
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('IMG_3985.jpeg');
+            background-size: cover;
+            background-position: center;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        .envelope-hidden {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none;
+        }
+
+        .seal-btn {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            color: #7b1fa2;
+            padding: 16px 32px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.95em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 55px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .seal-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* --- VENTANA DE MEME NO IR --- */
+        #meme-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .meme-title {
+            color: #ffffff;
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        .meme-img-container {
+            width: 85%;
+            max-width: 320px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+        .meme-img-container img {
+            width: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="envelope-overlay" onclick="abrirInvitacion()">
+        <button class="seal-btn">📩 Abrir Invitación</button>
+    </div>
+
+    <div class="phone-wrapper">
+        <div class="main-container">
+            
+            <div class="hero-section">
+                <h1 class="main-title">Andrea</h1>
+                <div class="gold-title">¡Mis 23 Años!</div>
+                
+                <div class="profile-circle">
+                    <img src="IMG_3969.jpeg" alt="Andrea">
+                </div>
+
+                <div class="countdown-container">
+                    <div class="countdown-title">⏳ Cuenta Regresiva para la Fiesta</div>
+                    <div class="countdown-row">
+                        <div class="count-item"><span class="count-num" id="days">01</span><span class="count-lbl">Días</span></div>
+                        <div class="count-item"><span class="count-num" id="hours">08</span><span class="count-lbl">Horas</span></div>
+                        <div class="count-item"><span class="count-num" id="minutes">49</span><span class="count-lbl">Min</span></div>
+                        <div class="count-item"><span class="count-num" id="seconds">09</span><span class="count-lbl">Seg</span></div>
+                    </div>
+                </div>
+
+                <button class="action-btn btn-gold" id="play-btn" onclick="toggleMusic()">
+                    <i class="fa-solid fa-music"></i> <span id="music-txt">Escuchar Música</span>
+                </button>
+
+                <p class="info-phrase">
+                    "Te invito a compartir conmigo una noche mágica, llena de música y alegría."
+                </p>
+            </div>
+
+            <div class="section-box-styled">
+                <ul class="data-list">
+                    <li>📅 <strong>Fecha:</strong> Lunes, 15 de Junio</li>
+                    <li>⏰ <strong>Hora:</strong> 8:00 PM</li>
+                    <li>📍 <strong>Dirección:</strong> Urb Villa Progreso Mz 2 Lt 1</li>
+                    <li>👗 <strong>Vestimenta:</strong> Casual Elegante</li>
+                </ul>
+            </div>
+
+            <div class="section-box-styled" style="padding: 15px 10px;">
+                <p style="font-size: 0.85em; font-weight: bold; margin-bottom: 8px; color: #7b1fa2;">¿Qué canción no debe faltar?</p>
+                <input type="text" id="song-input" class="music-input-field" placeholder="Nombre de la canción y artista...">
+                <button class="action-btn btn-purple" onclick="enviarSugerenciaMusica()" style="margin: 0; padding: 10px; font-size: 0.8em; width: 75%;">
+                    <i class="fa-brands fa-whatsapp"></i> Enviar Sugerencia
+                </button>
+            </div>
+
+            <div class="gift-box">
+                <div class="gift-title">🎁 Sugerencias de Regalo:</div>
+                
+                <div class="gift-item-row"><span>👠 Zapato:</span> <strong>Talla 37</strong></div>
+                <div class="gift-item-row"><span>👚 Ropa:</span> <strong>Talla M</strong></div>
+                <div class="gift-item-row"><span>👖 Jean:</span> <strong>Talla 34</strong></div>
+                <div class="gift-item-row">
+                    <span>🎨 Colores favoritos:</span> 
+                    <strong>Lila <span class="color-circle" style="background-color: #e1bee7;"></span> y Celeste <span class="color-circle" style="background-color: #b3e5fc;"></span></strong>
+                </div>
+
+                <div class="yape-meme-wrapper">
+                    <img src="IMG_3982.jpeg" alt="Detalle Regalo">
+                </div>
+
+                <button class="action-btn btn-purple" onclick="mostrarYape()" style="font-size: 0.8em; padding: 11px; width: 85%;">
+                    <i class="fa-solid fa-qrcode"></i> Ver Datos bancarios
+                </button>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <a href="https://maps.google.com/?q=Urb+Villa+Progreso+Mz+2+Lt+1" target="_blank" class="action-btn btn-purple">
+                    <i class="fa-solid fa-location-dot"></i> Ver Ubicación en Maps
+                </a>
+                
+                <a href="https://wa.me/51918657782?text=%C2%A1Hola%20Andrea!%20Confirmad%C3%ADsimo%20que%20voy%20a%20tu%20cumple%20%F0%9F%8E%89" target="_blank" class="action-btn btn-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> Confirmar por WhatsApp
+                </a>
+
+                <button class="action-btn btn-dark" onclick="mostrarMeme()">
+                    <i class="fa-solid fa-xmark"></i> No podré ir
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="meme-screen">
+        <div class="meme-title">EL QUE NO PUDO IR A LA FIESTA</div>
+        <div class="meme-img-container">
+            <img src="IMG_3970.jpeg" alt="Meme triste">
+        </div>
+        <button class="seal-btn" style="padding: 12px 25px; font-size: 0.8em;" onclick="regresarInvitacion()">
+            ↩️ Volver
+        </button>
+    </div>
+
+    <audio id="bachata-player" src="musica.mp3" loop></audio>
+
+    <script>
+        var isPlaying = false;
+        var audio = document.getElementById('bachata-player');
+
+        function abrirInvitacion() {
+            document.getElementById('envelope-overlay').classList.add('envelope-hidden');
+            toggleMusic(); 
+        }
+
+        function toggleMusic() {
+            var txt = document.getElementById('music-txt');
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    txt.innerText = "Pausar Música";
+                    isPlaying = true;
+                }).catch(error => {
+                    console.log("Audio en espera del click.");
+                });
+            } else {
+                audio.pause();
+                txt.innerText = "Escuchar Música";
+                isPlaying = false;
+            }
+        }
+
+        function enviarSugerenciaMusica() {
+            var cancion = document.getElementById('song-input').value.trim();
+            if (cancion === "") {
+                alert("Por favor, escribe el nombre de una canción primero.");
+                return;
+            }
+            var mensaje = encodeURIComponent("¡Hola Andrea! Esta es mi sugerencia musical para tu fiesta: " + cancion + " 🎶");
+            window.open("https://wa.me/51918657782?text=" + mensaje, "_blank");
+        }
+
+        function mostrarYape() {
+            alert("✨ DATOS DE YAPE ✨\n\n📱 Número: 918657782\n👤 Nombre: Lizeth Andrea Coaquira Hanco");
+        }
+
+        function mostrarMeme() {
+            document.getElementById('meme-screen').style.display = 'flex';
+            if (isPlaying) { 
+                audio.pause();
+                document.getElementById('music-txt').innerText = "Escuchar Música";
+                isPlaying = false;
+            }
+        }
+
+        function regresarInvitacion() {
+            document.getElementById('meme-screen').style.display = 'none';
+        }
+
+        // --- CONTADOR ORIGINAL SINCRONIZADO ---
+        const targetDate = new Date("June 15, 2026 20:00:00").getTime();
+
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            if (difference > 0) {
+                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+            } else {
+                clearInterval(countdownInterval);
+                document.querySelector(".countdown-container").innerHTML = "<div style='font-weight:bold; color:#7b1fa2; font-size:1em;'>🎉 ¡HOY ES EL GRAN DÍA! 🎉</div>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
