@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Birthday - BTS Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            font-family: 'Montserrat', sans-serif;
+            color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Envoltorio simulando la pantalla del celular con bordes rojos gruesos de la referencia */
+        .phone-wrapper {
+            background-color: #bd081c; /* Rojo temático principal */
+            padding: 10px;
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        }
+
+        /* --- PANTALLA PRINCIPAL (TARJETA CONTINUA) --- */
+        .main-container {
+            background-color: #ffffff;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        /* --- BANNER DE ENTRADA / FOTO --- */
+        .hero-banner {
+            background-color: #000000;
+            position: relative;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+        }
+
+        .hero-overlay-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, #ffffff);
+            padding: 20px 0 10px 0;
+        }
+
+        /* --- SECCIONES DE TEXTO --- */
+        .section-block {
+            padding: 35px 20px;
+            border-bottom: 2px solid #f0f0f0;
+            position: relative;
+        }
+
+        .section-block-dark {
+            background-color: #a6001a;
+            color: #ffffff;
+            padding: 25px 20px;
+        }
+
+        .main-title {
+            font-size: 2.5em;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #000000;
+            margin-top: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #666666;
+            margin-bottom: 25px;
+        }
+
+        .big-number {
+            font-size: 5.5em;
+            font-weight: 900;
+            color: #bd081c;
+            line-height: 1;
+            margin: 15px 0;
+        }
+
+        .script-title {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.2em;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+
+        .script-title-light {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.2em;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .info-text {
+            font-size: 0.95em;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            color: #333333;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        /* --- MINI CALENDARIO ESTILO REFERENCIA --- */
+        .calendar-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .vinyl-deco {
+            width: 75px;
+            height: 75px;
+            background: radial-gradient(circle, #333 10%, #111 40%, #8c0012 41%, #8c0012 46%, #111 47%);
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .vinyl-inner {
+            width: 20px;
+            height: 20px;
+            background-color: #ffffff;
+            border-radius: 50%;
+        }
+
+        .mini-calendar {
+            border: 2px solid #000000;
+            padding: 8px;
+            width: 120px;
+            font-size: 9px;
+            font-weight: bold;
+            background: #fff;
+        }
+        .calendar-head {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #000;
+            padding-bottom: 4px;
+            margin-bottom: 4px;
+            font-size: 10px;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+            text-align: center;
+        }
+        .calendar-grid span.active {
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 2px;
+            padding: 1px;
+        }
+
+        /* --- CONTADOR EN REVERSA (ESTILO MINIMALISTA) --- */
+        .countdown-row {
+            display: flex;
+            justify-content: space-around;
+            max-width: 300px;
+            margin: 20px auto 0 auto;
+        }
+        .count-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .count-num {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #000000;
+        }
+        .count-lbl {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888888;
+        }
+
+        /* --- ENTRADA RECOMENDACIÓN MUSICAL --- */
+        .music-box {
+            width: 100%;
+            max-width: 280px;
+            margin: 15px auto 0 auto;
+        }
+        .music-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #000000;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8em;
+            margin-bottom: 8px;
+            outline: none;
+        }
+
+        /* --- BOTONES PREMIUM DE ACCIÓN --- */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 280px;
+            background-color: #bd081c;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.85em;
+            letter-spacing: 2px;
+            padding: 14px;
+            border: none;
+            border-radius: 25px;
+            margin: 8px 0;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .action-btn:hover {
+            background-color: #960413;
+        }
+        .action-btn-white {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .action-btn-white:hover {
+            background-color: #f2f2f2;
+        }
+        .action-btn-whatsapp {
+            background-color: #25D366;
+        }
+        .action-btn-whatsapp:hover {
+            background-color: #1eab52;
+        }
+        .action-btn-dark {
+            background-color: transparent;
+            color: #999999;
+            border: 1px dashed #cccccc;
+            font-weight: normal;
+            font-size: 0.75em;
+            text-transform: none;
+            border-radius: 4px;
+            margin-top: 25px;
+        }
+        .action-btn-dark:hover {
+            background-color: #fafafa;
+            color: #333;
+        }
+
+        /* --- LISTAS DE DETALLES --- */
+        .clean-list {
+            list-style: none;
+            text-align: left;
+            max-width: 260px;
+            margin: 0 auto;
+        }
+        .clean-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eeeeee;
+            font-size: 0.95em;
+            display: flex;
+            justify-content: space-between;
+        }
+        .clean-list li strong {
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+        }
+
+        /* --- OVERLAY DE ENTRADA (SOBRE) --- */
+        #envelope-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s;
+            cursor: pointer;
+        }
+        .envelope-hidden {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none;
+        }
+        .seal-btn {
+            background: none;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            padding: 15px 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .seal-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* --- MEME SCREEN --- */
+        #meme-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        .meme-title {
+            color: #ffffff;
+            font-size: 1.5em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        .meme-img-container {
+            width: 90%;
+            max-width: 340px;
+            border: 3px solid #bd081c;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+        .meme-img-container img {
+            width: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="envelope-overlay" onclick="abrirInvitacion()">
+        <button class="seal-btn">Abrir Invitación</button>
+    </div>
+
+    <div class="phone-wrapper">
+        <div class="main-container">
+            
+            <div class="hero-banner">
+                <img src="IMG_3969.jpeg" alt="Andrea Birthday">
+                <div class="hero-overlay-title"></div>
+            </div>
+
+            <div style="padding: 10px 20px 25px 20px; border-bottom: 2px solid #f0f0f0;">
+                <p class="subtitle" style="margin-bottom: 5px;">Arirang Edition</p>
+                <h1 class="main-title">Andrea</h1>
+                <p class="subtitle">Te invita a celebrar su cumpleaños número:</p>
+                <div class="big-number">23</div>
+                
+                <button class="action-btn" id="play-btn" onclick="toggleMusic()" style="max-width: 200px; padding: 10px; font-size: 0.75em;">
+                    <i class="fa-solid fa-play"></i> <span id="music-txt">Activar Música</span>
+                </button>
+            </div>
+
+            <div class="section-block">
+                <p class="subtitle" style="margin-bottom: 5px;">Este próximo:</p>
+                <h2 class="main-title" style="font-size: 1.8em; color: #bd081c;">Lunes 15</h2>
+                <p class="subtitle" style="margin-bottom: 15px;">Junio</p>
+
+                <div class="calendar-row">
+                    <div class="vinyl-deco">
+                        <div class="vinyl-inner"></div>
+                    </div>
+                    <div class="mini-calendar">
+                        <div class="calendar-head">
+                            <span>JUNIO 2026</span>
+                        </div>
+                        <div class="calendar-grid">
+                            <span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span>
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+                            <span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span>
+                            <span class="active">15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span>
+                            <span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span>
+                            <span>29</span><span>30</span>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="clean-list" style="margin-top: 15px;">
+                    <li><strong>⏰ Hora:</strong> <span>8:00 PM</span></li>
+                    <li><strong>📍 Lugar:</strong> <span>Urb Villa Progreso Mz 2 Lt 1</span></li>
+                </ul>
+
+                <div class="countdown-row">
+                    <div class="count-item"><span class="count-num" id="days">00</span><span class="count-lbl">Días</span></div>
+                    <div class="count-item"><span class="count-num" id="hours">00</span><span class="count-lbl">Hrs</span></div>
+                    <div class="count-item"><span class="count-num" id="minutes">00</span><span class="count-lbl">Min</span></div>
+                    <div class="count-item"><span class="count-num" id="seconds">00</span><span class="count-lbl">Seg</span></div>
+                </div>
+            </div>
+
+            <div class="section-block">
+                <h3 class="script-title">Dress code</h3>
+                <p class="subtitle" style="margin-bottom: 10px;">Temática Arirang BTS</p>
+                <p class="info-text" style="font-weight: bold; text-transform: uppercase; font-size: 0.85em; letter-spacing: 2px; color: #bd081c; margin-bottom: 15px;">
+                    Casual Elegante
+                </p>
+                
+                <div class="music-box">
+                    <p class="subtitle" style="font-size: 0.7em; margin-bottom: 5px;">¿Recomendación musical?</p>
+                    <input type="text" class="music-input" placeholder="Escribe tu canción favorita...">
+                    <button class="action-btn" onclick="alert('¡Sugerencia guardada para la fiesta! 🎶')" style="padding: 8px; font-size: 0.7em; margin: 0;">Enviar sugerencia</button>
+                </div>
+            </div>
+
+            <div class="section-block section-block-dark">
+                <h3 class="script-title-light">Mesa de regalos</h3>
+                <p class="info-text" style="color: #ffffff; font-size: 0.85em; margin-bottom: 20px;">
+                    "Tu presencia en este día es lo más importante para mí, pero si quieres darme un detalle, aquí tienes mis tallas o sugerencias."
+                </p>
+                
+                <ul class="clean-list" style="max-width: 220px; margin-bottom: 20px; color: white;">
+                    <li style="border-bottom-color: rgba(255,255,255,0.2)"><strong>👠 Zapato:</strong> <span>Talla 37</span></li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2)"><strong>👚 Ropa:</strong> <span>Talla M</span></li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2)"><strong>👖 Jean:</strong> <span>Talla 34</span></li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2)"><strong>🎨 Colores:</strong> <span>Lila y Celeste</span></li>
+                </ul>
+
+                <button class="action-btn action-btn-white" onclick="alert('BBVA\nNro de Cuenta: XXXX-XXXX-XXXX\nCCI: XXXX-XXXX-XXXX\nTitular: Andrea C.')" style="font-size: 0.75em; padding: 10px;">
+                    <i class="fa-solid fa-credit-card"></i> Ver Datos Bancarios
+                </button>
+            </div>
+
+            <div class="section-block" style="border-bottom: none; padding-bottom: 40px;">
+                <a href="Https://maps.app.goo.gl/unnsjQrQRmTLXvLEA?g_st=ic" target="_blank" class="action-btn">
+                    <i class="fa-solid fa-map-location-dot"></i> Ver Ubicación
+                </a>
+                
+                <a href="https://wa.me/51918657782?text=%C2%A1Hola%20Andrea!%20Confirmad%C3%ADsimo%20que%20voy%20a%20tu%20cumple%20%F0%9F%8E%89" target="_blank" class="action-btn action-btn-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> Confirmar asistencia
+                </a>
+
+                <button class="action-btn action-btn-dark" onclick="mostrarMeme()">
+                    ❌ No podré ir
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="meme-screen">
+        <div class="meme-title">EL QUE NO PUDO IR A LA FIESTA</div>
+        <div class="meme-img-container">
+            <img src="IMG_3970.jpeg" alt="Meme llorando">
+        </div>
+        <button class="action-btn action-btn-white" style="max-width: 200px;" onclick="regresarInvitacion()">
+            ↩️ Volver
+        </button>
+    </div>
+
+    <audio id="bachata-player" src="musica.mp3" loop></audio>
+
+    <script>
+        var isPlaying = false;
+        var audio = document.getElementById('bachata-player');
+
+        function abrirInvitacion() {
+            document.getElementById('envelope-overlay').classList.add('envelope-hidden');
+            // Intentar reproducir automáticamente al abrir (si el navegador lo permite)
+            toggleMusic(); 
+        }
+
+        function toggleMusic() {
+            var txt = document.getElementById('music-txt');
+            var btn = document.getElementById('play-btn');
+            
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    txt.innerText = "Pausar Música";
+                    btn.innerHTML = '<i class="fa-solid fa-pause"></i> <span id="music-txt">Pausar Música</span>';
+                    isPlaying = true;
+                }).catch(error => {
+                    console.log("Reproducción automática bloqueada por el navegador.");
+                });
+            } else {
+                audio.pause();
+                txt.innerText = "Activar Música";
+                btn.innerHTML = '<i class="fa-solid fa-play"></i> <span id="music-txt">Activar Música</span>';
+                isPlaying = false;
+            }
+        }
+
+        function mostrarMeme() {
+            document.getElementById('meme-screen').style.display = 'flex';
+            if (isPlaying) { 
+                audio.pause();
+                document.getElementById('music-txt').innerText = "Activar Música";
+                isPlaying = false;
+            }
+        }
+
+        // --- CUENTA REGRESIVA ---
+        const targetDate = new Date("June 15, 2026 20:00:00").getTime();
+
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            if (difference > 0) {
+                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+            } else {
+                clearInterval(countdownInterval);
+                document.querySelector(".countdown-row").innerHTML = "<div style='font-weight:bold; color:#bd081c; font-size:1.1em; letter-spacing:1px;'>🎉 ¡LLEGÓ EL DÍA! 🎉</div>";
+            }
+        }, 1000);
+
+        function regresarInvitacion() {
+            document.getElementById('meme-screen').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
